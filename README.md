@@ -527,6 +527,12 @@ Observacoes:
 - nao expor valores em capturas de tela
 - revisar permissao do usuario `jenkins` para Docker e acesso ao cluster
 
+**Jenkins - Credenciais protegidas**: Comprova que a pipeline referencia credenciais por ID, sem expor tokens, senhas ou secrets no painel.
+
+<p align="center">
+  <img src="docs/images/20-jenkins-credentials-list-safe.png" alt="Jenkins - Credenciais protegidas" width="980" />
+</p>
+
 [⬆ Voltar ao topo](#topo)
 
 <a id="integracao-com-docker-hub"></a>
@@ -620,11 +626,19 @@ Isso permite demonstrar conceitos de deploy seguro, rollout controlado e verific
   <img src="docs/images/13-kubernetes-get-all-wide.png" alt="Kubernetes - kubectl get all" width="980" />
 </p>
 
+**Kubernetes - Rollout concluido**: Comprova que o deployment `order-status-api` atingiu estado pronto com `2/2` replicas no namespace alvo.
+
+<p align="center">
+  <img src="docs/images/14-kubernetes-deployment-ready.png" alt="Kubernetes - Rollout concluido" width="980" />
+</p>
+
 **Kubernetes - Smoke test do servico**: Comprova a validacao pos-deploy com a resposta `Service is healthy`.
 
 <p align="center">
   <img src="docs/images/17-kubernetes-smoke-test-success.png" alt="Kubernetes - Smoke test do servico" width="980" />
 </p>
+
+Para manter o README focado no fluxo principal, capturas mais operacionais, como `Tooling Info`, `node Ready`, `pods Running`, `Service ClusterIP`, templates de agente e detalhes adicionais de validacao, permanecem concentradas em `docs/evidence/README.md` e `docs/evidence/kubernetes-validation.md`.
 
 [⬆ Voltar ao topo](#topo)
 
@@ -661,6 +675,8 @@ Para auditoria detalhada dos artefatos, capturas e comprovacoes tecnicas:
 - [docs/evidence/README.md](docs/evidence/README.md)
 - [docs/evidence/kubernetes-validation.md](docs/evidence/kubernetes-validation.md)
 - [docs/images/](docs/images/)
+
+O README principal destaca apenas as evidencias mais relevantes para leitura de portfolio; os registros mais operacionais continuam organizados no indice tecnico acima.
 
 [⬆ Voltar ao topo](#topo)
 

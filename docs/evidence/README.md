@@ -2,6 +2,11 @@
 
 Indice tecnico das evidencias do laboratorio CI/CD com Node.js, Jenkins, Docker Hub e Kubernetes/k3d.
 
+## Nota de curadoria
+
+O `README.md` principal concentra apenas as evidencias visuais mais representativas do fluxo ponta a ponta.
+As capturas mais operacionais, detalhadas ou redundantes permanecem neste indice tecnico para preservar uma leitura mais objetiva do portfolio.
+
 ## Resumo validado
 
 - Jenkins job: `nodejs-jenkins-k8s-cicd-lab`

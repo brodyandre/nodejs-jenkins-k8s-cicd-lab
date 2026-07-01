@@ -174,6 +174,8 @@ Payload de exemplo:
 |   |-- jenkins-setup.md
 |   |-- kubernetes-deploy.md
 |   `-- troubleshooting.md
+|-- scripts/
+|   `-- jenkins/
 |-- k8s/
 |   |-- deployment.yaml
 |   |-- kustomization.yaml
@@ -316,6 +318,12 @@ Estagios implementados:
 | `Deploy to Kubernetes` | aplica manifests e atualiza a imagem do deployment |
 | `Kubernetes Smoke Test` | testa a API via Service DNS no cluster |
 | `Cleanup Local Docker Resources` | remove artefatos locais do job |
+
+Automacao do job:
+
+- o repositorio inclui `scripts/jenkins/create-pipeline-job.sh` para criar ou atualizar o job ideal no Jenkins via API
+- para este projeto, o melhor ponto de partida e um job dedicado `order-status-api-pipeline`
+- se no futuro voce quiser validar multiplas branches automaticamente, a evolucao natural e `Multibranch Pipeline`
 
 [⬆ Voltar ao topo](#topo)
 

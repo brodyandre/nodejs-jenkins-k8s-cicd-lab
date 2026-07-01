@@ -40,6 +40,23 @@ Se o Jenkins estiver rodando em uma VM Ubuntu, valide tambem:
 8. Em `Script Path`, use `Jenkinsfile`.
 9. Salve o job e execute `Build Now`.
 
+## Opcao automatizada
+
+Se voce preferir evitar configuracao manual, o repositorio agora inclui um script para criar ou atualizar o job pela API do Jenkins:
+
+```bash
+export JENKINS_URL="http://192.168.15.96:8080"
+export JENKINS_USER="admin"
+export JENKINS_API_TOKEN="seu-token"
+export JOB_NAME="order-status-api-pipeline"
+
+bash scripts/jenkins/create-pipeline-job.sh
+```
+
+Referencia complementar:
+
+- `scripts/jenkins/README.md`
+
 ## O que validar no primeiro build
 
 - o agente Jenkins consegue executar `node`, `npm`, `docker` e `kubectl`

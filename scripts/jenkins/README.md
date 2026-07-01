@@ -53,9 +53,9 @@ node scripts/jenkins/create-pipeline-job.mjs
 Opcao 1, usando variaveis exportadas no shell:
 
 ```bash
-export JENKINS_URL="http://192.168.15.96:8080"
-export JENKINS_USER="seu_usuario"
-export JENKINS_API_TOKEN="seu_api_token"
+export JENKINS_URL="http://jenkins.example.local:8080"
+export JENKINS_USER="your_jenkins_user"
+export JENKINS_API_TOKEN="your_jenkins_api_token"
 
 node scripts/jenkins/create-pipeline-job.mjs --apply
 ```
@@ -70,9 +70,9 @@ node scripts/jenkins/create-pipeline-job.mjs --apply
 ## Aplicar e disparar build
 
 ```bash
-export JENKINS_URL="http://192.168.15.96:8080"
-export JENKINS_USER="seu_usuario"
-export JENKINS_API_TOKEN="seu_api_token"
+export JENKINS_URL="http://jenkins.example.local:8080"
+export JENKINS_USER="your_jenkins_user"
+export JENKINS_API_TOKEN="your_jenkins_api_token"
 
 node scripts/jenkins/create-pipeline-job.mjs --apply --build
 ```

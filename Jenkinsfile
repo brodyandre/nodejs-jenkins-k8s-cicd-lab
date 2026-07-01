@@ -105,7 +105,8 @@ pipeline {
             "${IMAGE_IMMUTABLE}"
 
           for attempt in $(seq 1 20); do
-            if curl -fsS "http://127.0.0.1:${LOCAL_SMOKE_PORT}/health" >/dev/null; then
+            if docker exec "${LOCAL_SMOKE_CONTAINER}" \
+              node -e "fetch('http://127.0.0.1:3000/health').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"; then
               exit 0
             fi
             sleep 2

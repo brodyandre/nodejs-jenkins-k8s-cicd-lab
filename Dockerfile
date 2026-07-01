@@ -9,14 +9,14 @@ COPY package.json package-lock.json ./
 
 RUN npm ci --omit=dev \
   && npm cache clean --force \
-  && addgroup -S nodeapp \
-  && adduser -S nodeapp -G nodeapp
+  && addgroup -g 10001 -S nodeapp \
+  && adduser -S -D -H -u 10001 -G nodeapp nodeapp
 
 COPY src ./src
 
-RUN chown -R nodeapp:nodeapp /usr/src/app
+RUN chown -R 10001:10001 /usr/src/app
 
-USER nodeapp
+USER 10001:10001
 
 EXPOSE 3000
 

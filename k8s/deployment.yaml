@@ -19,6 +19,12 @@ spec:
         app.kubernetes.io/component: api
         app.kubernetes.io/part-of: jenkins-cicd-lab
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: order-status-api
           image: order-status-api:local
@@ -26,6 +32,11 @@ spec:
           ports:
             - name: http
               containerPort: 3000
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           env:
             - name: APP_NAME
               value: Order Status API

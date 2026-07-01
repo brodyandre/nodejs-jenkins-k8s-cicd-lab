@@ -1,16 +1,44 @@
 <a id="topo"></a>
 
-# Order Status API CI/CD Lab with Jenkins, Docker Hub, and Kubernetes/k3d
+# 🚀 Order Status API CI/CD Lab with Jenkins, Docker Hub, and Kubernetes/k3d
 
 Laboratorio local/VM de CI/CD para demonstrar, de forma objetiva e reproduzivel, como uma API Node.js pode passar por validacao automatizada, build Docker, publicacao no Docker Hub e deploy em Kubernetes k3d a partir de uma pipeline Jenkins.
 
+<div align="center">
+  <p>
+    <img alt="Node.js" src="https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+    <img alt="Express" src="https://img.shields.io/badge/Express-API-000000?style=for-the-badge&logo=express&logoColor=white" />
+    <img alt="Jest" src="https://img.shields.io/badge/Jest-Tests-C21325?style=for-the-badge&logo=jest&logoColor=white" />
+    <img alt="Docker" src="https://img.shields.io/badge/Docker-Container-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+    <img alt="Jenkins" src="https://img.shields.io/badge/Jenkins-CI%2FCD-D24939?style=for-the-badge&logo=jenkins&logoColor=white" />
+    <img alt="Docker Hub" src="https://img.shields.io/badge/Docker%20Hub-Registry-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+    <img alt="Kubernetes" src="https://img.shields.io/badge/Kubernetes-k3d-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" />
+  </p>
+  <p>
+    <img alt="Validated Build" src="https://img.shields.io/badge/Validated%20Build-%234-success-brightgreen?style=flat-square&logo=jenkins&logoColor=white" />
+    <img alt="Docker Image" src="https://img.shields.io/badge/Image-las43%2Forder--status--api%3A4--c36c06a-0A66C2?style=flat-square&logo=docker&logoColor=white" />
+    <img alt="Namespace" src="https://img.shields.io/badge/Namespace-jenkins--cicd--lab-326CE5?style=flat-square&logo=kubernetes&logoColor=white" />
+    <img alt="Smoke Test" src="https://img.shields.io/badge/Smoke%20Test-Service%20is%20healthy-2ea44f?style=flat-square" />
+  </p>
+  <p>
+    <a href="#fluxo-cicd">🔄 Fluxo CI/CD</a> •
+    <a href="#evidencias-do-pipeline-ci-cd">📸 Evidências</a> •
+    <a href="#deploy-no-kubernetes">☸️ Deploy</a> •
+    <a href="#como-executar-localmente">▶️ Run Local</a>
+  </p>
+</div>
+
 ## Status atual
 
-- laboratorio validado em ambiente local/VM com Jenkins e cluster k3d
-- build `#4` concluido com publicacao da imagem `las43/order-status-api:4-c36c06a`
-- pipeline declarativa implementada em `Jenkinsfile`
-- evidencias reais versionadas em `docs/images/`
-- indice sanitizado das evidencias em `docs/evidence/README.md`
+- ✅ laboratorio validado em ambiente local/VM com Jenkins e cluster k3d
+- 📦 build `#4` concluido com publicacao da imagem `las43/order-status-api:4-c36c06a`
+- 🧾 pipeline declarativa implementada em `Jenkinsfile`
+- 🖼️ evidencias reais versionadas em `docs/images/`
+- 📚 indice sanitizado das evidencias em `docs/evidence/README.md`
+
+> **Snapshot do laboratorio:** `GitHub -> Jenkins -> Docker Hub -> Kubernetes/k3d -> Smoke Test`
+>
+> **Estado validado:** `Build #4` • `order-status-api` • `2/2 replicas` • `Service is healthy`
 
 ## Indice
 
@@ -124,6 +152,21 @@ Componentes principais:
 
 <a id="stack-utilizada"></a>
 ## Stack utilizada
+
+### 🧰 Barra de tecnologias
+
+<p>
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-Backend-339933?style=flat-square&logo=nodedotjs&logoColor=white" />
+  <img alt="Express" src="https://img.shields.io/badge/Express-Web%20API-000000?style=flat-square&logo=express&logoColor=white" />
+  <img alt="Jest" src="https://img.shields.io/badge/Jest-Testes-C21325?style=flat-square&logo=jest&logoColor=white" />
+  <img alt="Supertest" src="https://img.shields.io/badge/Supertest-Integration-0F172A?style=flat-square" />
+  <img alt="ESLint" src="https://img.shields.io/badge/ESLint-Quality-4B32C3?style=flat-square&logo=eslint&logoColor=white" />
+  <img alt="Docker" src="https://img.shields.io/badge/Docker-Imagem-2496ED?style=flat-square&logo=docker&logoColor=white" />
+  <img alt="Jenkins" src="https://img.shields.io/badge/Jenkins-Automation-D24939?style=flat-square&logo=jenkins&logoColor=white" />
+  <img alt="Docker Hub" src="https://img.shields.io/badge/Docker%20Hub-Publish-2496ED?style=flat-square&logo=docker&logoColor=white" />
+  <img alt="Kubernetes" src="https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?style=flat-square&logo=kubernetes&logoColor=white" />
+  <img alt="k3d" src="https://img.shields.io/badge/k3d-Local%20Cluster-F97316?style=flat-square" />
+</p>
 
 | Camada | Tecnologias |
 | --- | --- |

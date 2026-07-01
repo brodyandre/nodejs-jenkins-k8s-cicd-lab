@@ -133,6 +133,20 @@ Componentes principais:
 | Docker Hub | armazena a imagem publicada |
 | Kubernetes k3d | recebe o deploy e executa o smoke test interno |
 
+### 🖼️ Contexto visual do repositório
+
+**GitHub - Repositório publicado**: Comprova que o codigo-fonte da aplicacao e a automacao de CI/CD estao versionados no GitHub.
+
+<p align="center">
+  <img src="docs/images/01-github-repository.png" alt="GitHub - Repositorio publicado" width="980" />
+</p>
+
+**GitHub - Jenkinsfile versionado**: Comprova que o pipeline Jenkins esta definido como codigo no proprio repositorio.
+
+<p align="center">
+  <img src="docs/images/02-github-jenkinsfile-pipeline-stages.png" alt="GitHub - Jenkinsfile versionado" width="980" />
+</p>
+
 [⬆ Voltar ao topo](#topo)
 
 <a id="fluxo-cicd"></a>
@@ -431,6 +445,26 @@ Estagios implementados:
 
 O objetivo da pipeline e demonstrar uma jornada tecnica coerente de CI/CD em laboratorio: validar codigo, empacotar a aplicacao, publicar a imagem e confirmar o deploy no cluster com smoke test interno.
 
+### 📸 Execução validada no Jenkins
+
+**Jenkins - Job configurado**: Comprova a existencia do job dedicado `nodejs-jenkins-k8s-cicd-lab` no Jenkins.
+
+<p align="center">
+  <img src="docs/images/03-jenkins-job-dashboard.png" alt="Jenkins - Job configurado" width="980" />
+</p>
+
+**Jenkins - Build #4 com sucesso**: Comprova a execucao bem-sucedida da pipeline validada neste laboratorio.
+
+<p align="center">
+  <img src="docs/images/04-jenkins-build-4-success.png" alt="Jenkins - Build 4 com sucesso" width="980" />
+</p>
+
+**Jenkins - Testes automatizados**: Comprova que a aplicacao Node.js passou pela etapa de testes antes do empacotamento.
+
+<p align="center">
+  <img src="docs/images/06-jenkins-console-tests-passed.png" alt="Jenkins - Testes automatizados" width="980" />
+</p>
+
 Automacao do job:
 
 - o repositorio inclui `scripts/jenkins/create-pipeline-job.mjs` para criar ou atualizar o job ideal no Jenkins via API
@@ -528,6 +562,24 @@ Exemplo validado neste laboratorio:
 las43/order-status-api:4-c36c06a
 ```
 
+**Docker - Build e smoke test local**: Comprova que a imagem foi gerada e validada localmente antes da publicacao.
+
+<p align="center">
+  <img src="docs/images/07-jenkins-console-docker-build-smoke.png" alt="Docker - Build e smoke test local" width="980" />
+</p>
+
+**Docker Hub - Push da imagem**: Comprova o envio da imagem para o repositorio `las43/order-status-api` a partir do Jenkins.
+
+<p align="center">
+  <img src="docs/images/08-jenkins-console-dockerhub-push.png" alt="Docker Hub - Push da imagem" width="980" />
+</p>
+
+**Docker Hub - Tags publicadas**: Comprova a publicacao da imagem validada `las43/order-status-api:4-c36c06a` no Docker Hub.
+
+<p align="center">
+  <img src="docs/images/11-dockerhub-order-status-api-tags.png" alt="Docker Hub - Tags publicadas" width="980" />
+</p>
+
 Importante:
 
 - as evidencias reais de push e tags publicadas estao registradas em `docs/images/08-jenkins-console-dockerhub-push.png` e `docs/images/11-dockerhub-order-status-api-tags.png`
@@ -556,12 +608,32 @@ Fluxo de deploy:
 
 Isso permite demonstrar conceitos de deploy seguro, rollout controlado e verificacao de saude da aplicacao em um cluster local de laboratorio.
 
+**Kubernetes - Deploy no k3d**: Comprova a etapa de entrega continua para o namespace `jenkins-cicd-lab` e o deployment `order-status-api`.
+
+<p align="center">
+  <img src="docs/images/09-jenkins-console-kubernetes-deploy.png" alt="Kubernetes - Deploy no k3d" width="980" />
+</p>
+
+**Kubernetes - `kubectl get all`**: Comprova a visao consolidada dos recursos implantados no namespace `jenkins-cicd-lab`.
+
+<p align="center">
+  <img src="docs/images/13-kubernetes-get-all-wide.png" alt="Kubernetes - kubectl get all" width="980" />
+</p>
+
+**Kubernetes - Smoke test do servico**: Comprova a validacao pos-deploy com a resposta `Service is healthy`.
+
+<p align="center">
+  <img src="docs/images/17-kubernetes-smoke-test-success.png" alt="Kubernetes - Smoke test do servico" width="980" />
+</p>
+
 [⬆ Voltar ao topo](#topo)
 
 <a id="evidencias-do-pipeline-ci-cd"></a>
 ## Evidências do Pipeline CI/CD
 
 As evidencias abaixo documentam a execucao real da pipeline CI/CD da aplicacao Node.js com Jenkins, Docker, Docker Hub e Kubernetes/k3d. O fluxo validado corresponde ao `Build #4`, com publicacao da imagem `las43/order-status-api:4-c36c06a`, deploy no namespace `jenkins-cicd-lab` e smoke test final com retorno `Service is healthy`.
+
+As imagens do fluxo principal tambem foram distribuidas nas secoes tecnicas acima, para que o README conte a historia do laboratorio no contexto de cada etapa.
 
 ### Fluxo principal validado
 

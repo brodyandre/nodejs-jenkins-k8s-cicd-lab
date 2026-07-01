@@ -28,6 +28,7 @@ Projeto de portfolio para demonstrar uma esteira de CI/CD aplicada a uma API Nod
 - [Como executar com Docker](#como-executar-com-docker)
 - [Deploy no Kubernetes](#deploy-no-kubernetes)
 - [Pipeline Jenkins](#pipeline-jenkins)
+- [Automacao do job Jenkins via API](#automacao-do-job-jenkins-via-api)
 - [Credenciais Jenkins](#credenciais-jenkins)
 - [Integracao com Docker Hub](#integracao-com-docker-hub)
 - [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
@@ -321,9 +322,89 @@ Estagios implementados:
 
 Automacao do job:
 
-- o repositorio inclui `scripts/jenkins/create-pipeline-job.sh` para criar ou atualizar o job ideal no Jenkins via API
-- para este projeto, o melhor ponto de partida e um job dedicado `order-status-api-pipeline`
+- o repositorio inclui `scripts/jenkins/create-pipeline-job.mjs` para criar ou atualizar o job ideal no Jenkins via API
+- o `dry-run` e o comportamento padrao; o script so chama o Jenkins real com `--apply`
+- para este projeto, o melhor ponto de partida e um job dedicado `nodejs-jenkins-k8s-cicd-lab`
 - se no futuro voce quiser validar multiplas branches automaticamente, a evolucao natural e `Multibranch Pipeline`
+
+[⬆ Voltar ao topo](#topo)
+
+<a id="automacao-do-job-jenkins-via-api"></a>
+## Automação do job Jenkins via API
+
+O projeto inclui um script para criar ou atualizar automaticamente um job Jenkins do tipo `Pipeline from SCM` apontando para este repositório no GitHub.
+
+Esse fluxo foi pensado para o seu Jenkins local em:
+
+```text
+http://192.168.15.96:8080
+```
+
+Pre-requisitos:
+
+- Jenkins acessivel em `http://192.168.15.96:8080`
+- usuario Jenkins com permissao de criacao e configuracao de jobs
+- API token criado pelo usuario Jenkins
+- repositorio GitHub ja publicado
+- `Jenkinsfile` presente na raiz do repositório
+
+Passos recomendados:
+
+```bash
+cp .env.jenkins.example .env.jenkins.local
+npm run jenkins:job:dry-run
+npm run jenkins:job:apply
+npm run jenkins:job:apply-build
+```
+
+Observacoes importantes:
+
+- o script carrega `.env.jenkins.local` automaticamente quando esse arquivo existir na raiz do projeto
+- o `dry-run` e o comportamento padrao do script e apenas mostra o `config.xml` gerado
+- a chamada real ao Jenkins so acontece com `--apply`
+- o arquivo `.env.jenkins.local` nunca deve ser commitado
+
+Espacos para evidencias futuras:
+
+### Jenkins - Job criado automaticamente
+
+Imagem esperada:
+
+- tela do job `Pipeline from SCM` criado via API no Jenkins
+
+<!-- Adicionar imagem aqui apos execucao real -->
+
+<!-- Exemplo:
+![Jenkins job created automatically](docs/images/jenkins-job-created-automatically.png)
+-->
+
+[⬆ Voltar ao topo](#topo)
+
+### Jenkins - Pipeline from SCM
+
+Imagem esperada:
+
+- configuracao do job mostrando SCM Git, branch `main` e `Jenkinsfile`
+
+<!-- Adicionar imagem aqui apos configuracao real -->
+
+<!-- Exemplo:
+![Jenkins pipeline from scm](docs/images/jenkins-pipeline-from-scm.png)
+-->
+
+[⬆ Voltar ao topo](#topo)
+
+### Jenkins - Console Output da primeira execucao
+
+Imagem esperada:
+
+- console da primeira build disparada pelo job automatizado
+
+<!-- Adicionar imagem aqui apos execucao real -->
+
+<!-- Exemplo:
+![Jenkins first run console output](docs/images/jenkins-first-run-console-output.png)
+-->
 
 [⬆ Voltar ao topo](#topo)
 

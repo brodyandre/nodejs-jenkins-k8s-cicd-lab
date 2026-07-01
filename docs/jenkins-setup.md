@@ -32,7 +32,7 @@ Se o Jenkins estiver rodando em uma VM Ubuntu, valide tambem:
 
 1. Clique em `New Item`.
 2. Escolha `Pipeline`.
-3. Defina um nome como `order-status-api-pipeline`.
+3. Defina um nome como `nodejs-jenkins-k8s-cicd-lab`.
 4. Em `Pipeline`, selecione `Pipeline script from SCM`.
 5. Em `SCM`, escolha `Git`.
 6. Informe a URL do repositorio.
@@ -45,12 +45,19 @@ Se o Jenkins estiver rodando em uma VM Ubuntu, valide tambem:
 Se voce preferir evitar configuracao manual, o repositorio agora inclui um script para criar ou atualizar o job pela API do Jenkins:
 
 ```bash
-export JENKINS_URL="http://192.168.15.96:8080"
-export JENKINS_USER="admin"
-export JENKINS_API_TOKEN="seu-token"
-export JOB_NAME="order-status-api-pipeline"
+cp .env.jenkins.example .env.jenkins.local
+npm run jenkins:job:dry-run
+npm run jenkins:job:apply
+```
 
-bash scripts/jenkins/create-pipeline-job.sh
+Se preferir usar variaveis exportadas no shell:
+
+```bash
+export JENKINS_URL="http://192.168.15.96:8080"
+export JENKINS_USER="seu_usuario"
+export JENKINS_API_TOKEN="seu_api_token"
+
+node scripts/jenkins/create-pipeline-job.mjs --apply
 ```
 
 Referencia complementar:

@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "test": "jest --runInBand",
     "test:coverage": "jest --coverage --runInBand",
-    "verify": "npm run lint && npm test"
+    "verify": "npm run lint && npm test",
+    "jenkins:job:dry-run": "node scripts/jenkins/create-pipeline-job.mjs",
+    "jenkins:job:apply": "node scripts/jenkins/create-pipeline-job.mjs --apply",
+    "jenkins:job:apply-build": "node scripts/jenkins/create-pipeline-job.mjs --apply --build"
   },
   "engines": {
     "node": ">=18"

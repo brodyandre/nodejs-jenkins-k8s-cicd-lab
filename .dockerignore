@@ -1,0 +1,13 @@
+node_modules
+coverage
+.git
+.env
+.agents
+.codex
+npm-debug.log*
+*.log
+README.md
+docs
+Jenkinsfile
+k8s
+tests

@@ -631,37 +631,36 @@ Isso permite demonstrar conceitos de deploy seguro, rollout controlado e verific
 <a id="evidencias-do-pipeline-ci-cd"></a>
 ## Evidências do Pipeline CI/CD
 
-As evidencias abaixo documentam a execucao real da pipeline CI/CD da aplicacao Node.js com Jenkins, Docker, Docker Hub e Kubernetes/k3d. O fluxo validado corresponde ao `Build #4`, com publicacao da imagem `las43/order-status-api:4-c36c06a`, deploy no namespace `jenkins-cicd-lab` e smoke test final com retorno `Service is healthy`.
+Esta secao continua fazendo sentido para empregabilidade porque resume, em um unico ponto, o que um recrutador tecnico consegue comprovar sem precisar percorrer todo o README. As imagens do fluxo principal ja aparecem contextualizadas nas secoes tecnicas acima; aqui o foco e destacar **quais competencias praticas ficaram comprovadas**.
 
-As imagens do fluxo principal tambem foram distribuidas nas secoes tecnicas acima, para que o README conte a historia do laboratorio no contexto de cada etapa.
+### O que este laboratorio comprova
 
-### Fluxo principal validado
+| Competência demonstrada | Evidência validada | Onde inspecionar |
+| --- | --- | --- |
+| CI/CD como codigo | Repositorio publicado com `Jenkinsfile` versionado e fluxo declarativo definido no Git | [Arquitetura da solucao](#arquitetura-da-solucao) e [Pipeline Jenkins](#pipeline-jenkins) |
+| Qualidade automatizada | Pipeline Jenkins executando `npm ci`, lint e testes antes do empacotamento | [Pipeline Jenkins](#pipeline-jenkins) |
+| Containerizacao e publish | Imagem Docker criada, validada via smoke test local e publicada no Docker Hub como `las43/order-status-api:4-c36c06a` | [Integracao com Docker Hub](#integracao-com-docker-hub) |
+| Deploy em Kubernetes | Atualizacao automatizada do deployment `order-status-api` no namespace `jenkins-cicd-lab` | [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d) e [Deploy no Kubernetes](#deploy-no-kubernetes) |
+| Validacao operacional pos-deploy | Rollout acompanhado, recursos no cluster conferidos e smoke test final retornando `Service is healthy` | [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d) |
+| Higiene de seguranca e documentacao | Credenciais protegidas, `.env.jenkins.local` fora do Git e evidencias sanitizadas para portfolio | [Seguranca e boas praticas](#seguranca-e-boas-praticas) e [docs/evidence/README.md](docs/evidence/README.md) |
 
-- **GitHub - Repositório publicado**: Comprova que o codigo-fonte da aplicacao e a automacao de CI/CD estao versionados no GitHub. [Abrir imagem](docs/images/01-github-repository.png)
-- **GitHub - Jenkinsfile versionado**: Comprova que o pipeline Jenkins esta definido como codigo no proprio repositorio. [Abrir imagem](docs/images/02-github-jenkinsfile-pipeline-stages.png)
-- **Jenkins - Job configurado**: Comprova a existencia do job dedicado `nodejs-jenkins-k8s-cicd-lab` no Jenkins. [Abrir imagem](docs/images/03-jenkins-job-dashboard.png)
-- **Jenkins - Build #4 com sucesso**: Comprova a execucao bem-sucedida da pipeline validada neste laboratorio. [Abrir imagem](docs/images/04-jenkins-build-4-success.png)
-- **Jenkins - Testes automatizados**: Comprova que a aplicacao Node.js passou pela etapa de testes antes do empacotamento. [Abrir imagem](docs/images/06-jenkins-console-tests-passed.png)
-- **Docker - Build e smoke test local**: Comprova que a imagem foi gerada e validada localmente antes da publicacao. [Abrir imagem](docs/images/07-jenkins-console-docker-build-smoke.png)
-- **Docker Hub - Push da imagem**: Comprova o envio da imagem para o repositorio `las43/order-status-api` a partir do Jenkins. [Abrir imagem](docs/images/08-jenkins-console-dockerhub-push.png)
-- **Docker Hub - Tags publicadas**: Comprova a publicacao da imagem validada `las43/order-status-api:4-c36c06a` no Docker Hub. [Abrir imagem](docs/images/11-dockerhub-order-status-api-tags.png)
-- **Kubernetes - Deploy no k3d**: Comprova a etapa de entrega continua para o namespace `jenkins-cicd-lab` e o deployment `order-status-api`. [Abrir imagem](docs/images/09-jenkins-console-kubernetes-deploy.png)
-- **Kubernetes - `kubectl get all`**: Comprova a visao consolidada dos recursos implantados no namespace `jenkins-cicd-lab`. [Abrir imagem](docs/images/13-kubernetes-get-all-wide.png)
-- **Kubernetes - Smoke test do servico**: Comprova a validacao pos-deploy com a resposta `Service is healthy`. [Abrir imagem](docs/images/17-kubernetes-smoke-test-success.png)
+### Leitura recomendada para recrutadores
 
-### Evidências complementares
+Se a leitura for executiva, estas sao as secoes mais valiosas:
 
-- **Jenkins - Informacoes do agente**: Comprova a disponibilidade das ferramentas necessarias para a execucao da pipeline no agente Jenkins. [Abrir imagem](docs/images/05-jenkins-console-tooling-info.png)
-- **Kubernetes - Smoke test no console do Jenkins**: Comprova que a pipeline registrou sucesso na verificacao do servico dentro do cluster. [Abrir imagem](docs/images/10-jenkins-console-kubernetes-smoke-success.png)
-- **Kubernetes - No pronto**: Comprova que o ambiente k3d estava operacional durante a validacao do deploy. [Abrir imagem](docs/images/12-kubernetes-node-ready.png)
-- **Kubernetes - Deployment pronto**: Comprova que o deployment `order-status-api` atingiu estado pronto no namespace alvo. [Abrir imagem](docs/images/14-kubernetes-deployment-ready.png)
-- **Kubernetes - Pods em execucao**: Comprova que os pods da aplicacao permaneceram ativos apos o deploy. [Abrir imagem](docs/images/15-kubernetes-pods-running.png)
-- **Kubernetes - Service publicado**: Comprova a exposicao interna do servico da aplicacao no cluster. [Abrir imagem](docs/images/16-kubernetes-service.png)
-- **Jenkins - Kubernetes Cloud Provider**: Comprova a configuracao de integracao entre Jenkins e Kubernetes para evolucoes futuras do laboratorio. [Abrir imagem](docs/images/18-jenkins-kubernetes-cloud-provider.png)
-- **Jenkins - Template de agente Kubernetes**: Comprova a existencia de um template de agente para execucoes orientadas a Kubernetes. [Abrir imagem](docs/images/19-jenkins-k8s-agent-template.png)
-- **Jenkins - Credenciais protegidas**: Comprova que os IDs de credenciais estao registrados sem exposicao de segredos. [Abrir imagem](docs/images/20-jenkins-credentials-list-safe.png)
-- **Projeto - Estrutura do repositorio**: Comprova a organizacao do codigo, manifests, testes e documentacao tecnica. [Abrir imagem](docs/images/21-project-structure.png)
-- **Projeto - Organizacao das evidencias**: Comprova a estrutura adotada para documentar capturas e evidencias do pipeline. [Abrir imagem](docs/images/22-docs-evidence-files.png)
+1. [Status atual](#status-atual)
+2. [Fluxo CI/CD](#fluxo-cicd)
+3. [Pipeline Jenkins](#pipeline-jenkins)
+4. [Integracao com Docker Hub](#integracao-com-docker-hub)
+5. [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
+
+### Índice técnico das evidências
+
+Para auditoria detalhada dos artefatos, capturas e comprovacoes tecnicas:
+
+- [docs/evidence/README.md](docs/evidence/README.md)
+- [docs/evidence/kubernetes-validation.md](docs/evidence/kubernetes-validation.md)
+- [docs/images/](docs/images/)
 
 [⬆ Voltar ao topo](#topo)
 

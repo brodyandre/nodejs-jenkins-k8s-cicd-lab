@@ -100,7 +100,7 @@ Construir um projeto pequeno, legível e reproduzível que permita demonstrar:
 <a id="problema-que-o-projeto-resolve"></a>
 ## Problema que o projeto resolve
 
-Em muitos estudos de CI/CD, os exemplos param no build local ou não conectam validação, imagem, registro e deploy em uma mesma jornada. Este laboratório conecta essas etapas em um fluxo único, fácil de explicar em entrevistas e fácil de evoluir com evidências reais.
+Em muitos estudos de CI/CD, os exemplos param no build local ou não conectam validação, imagem, registro e deploy em uma mesma jornada. Este laboratório conecta essas etapas em um fluxo único, fácil de explicar e fácil de evoluir com evidências reais.
 
 [⬆ Voltar ao topo](#topo)
 

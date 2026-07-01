@@ -644,9 +644,9 @@ Esta secao continua fazendo sentido para empregabilidade porque resume, em um un
 | Validacao operacional pos-deploy | Rollout acompanhado, recursos no cluster conferidos e smoke test final retornando `Service is healthy` | [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d) |
 | Higiene de seguranca e documentacao | Credenciais protegidas, `.env.jenkins.local` fora do Git e evidencias sanitizadas para portfolio | [Seguranca e boas praticas](#seguranca-e-boas-praticas) e [docs/evidence/README.md](docs/evidence/README.md) |
 
-### Leitura recomendada para recrutadores
+### Seções-chave para leitura rápida
 
-Se a leitura for executiva, estas sao as secoes mais valiosas:
+Para uma revisão objetiva do laboratório, estas seções concentram o fluxo validado e as evidências principais:
 
 1. [Status atual](#status-atual)
 2. [Fluxo CI/CD](#fluxo-cicd)

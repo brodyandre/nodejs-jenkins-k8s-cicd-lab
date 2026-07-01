@@ -1,36 +1,36 @@
-# Jenkins Job Automation
+# Automação do job Jenkins
 
 ## Para que serve
 
-Este diretorio contem uma automacao segura para criar ou atualizar um job Jenkins do tipo `Pipeline from SCM` usando a Remote Access API do Jenkins.
+Este diretório contém uma automação segura para criar ou atualizar um job Jenkins do tipo `Pipeline from SCM` usando a Remote Access API do Jenkins.
 
 O script:
 
 - gera o `config.xml` do job
-- roda em `dry-run` por padrao
-- so chama o Jenkins real com a flag `--apply`
+- roda em `dry-run` por padrão
+- só chama o Jenkins real com a flag `--apply`
 - pode disparar uma build com `--build`
 - carrega `.env.jenkins.local` automaticamente quando esse arquivo existir na raiz do projeto
 
 ## Como criar um API token no Jenkins
 
-1. Acesse o Jenkins com seu usuario.
-2. Clique no usuario logado no canto superior direito.
+1. Acesse o Jenkins com seu usuário.
+2. Clique no usuário logado no canto superior direito.
 3. Abra `Security`.
 4. Crie um novo `API Token`.
-5. Guarde o token localmente e nao o versione no repositório.
+5. Guarde o token localmente e não o versione no repositório.
 
-## Variaveis suportadas
+## Variáveis suportadas
 
-| Variavel | Obrigatoria no dry-run | Obrigatoria no --apply | Padrao |
+| Variável | Obrigatória no dry-run | Obrigatória no --apply | Padrão |
 | --- | --- | --- | --- |
-| `JENKINS_URL` | nao | sim | - |
-| `JENKINS_USER` | nao | sim | - |
-| `JENKINS_API_TOKEN` | nao | sim | - |
-| `JOB_NAME` | nao | nao | `nodejs-jenkins-k8s-cicd-lab` |
-| `GITHUB_REPO_URL` | nao | nao | URL publica deste repositório |
-| `GIT_BRANCH` | nao | nao | `main` |
-| `JENKINSFILE_PATH` | nao | nao | `Jenkinsfile` |
+| `JENKINS_URL` | não | sim | - |
+| `JENKINS_USER` | não | sim | - |
+| `JENKINS_API_TOKEN` | não | sim | - |
+| `JOB_NAME` | não | não | `nodejs-jenkins-k8s-cicd-lab` |
+| `GITHUB_REPO_URL` | não | não | URL pública deste repositório |
+| `GIT_BRANCH` | não | não | `main` |
+| `JENKINSFILE_PATH` | não | não | `Jenkinsfile` |
 
 ## Dry-run
 
@@ -40,7 +40,7 @@ Exibe o `config.xml` gerado sem chamar o Jenkins:
 node scripts/jenkins/create-pipeline-job.mjs
 ```
 
-Com variaveis customizadas:
+Com variáveis customizadas:
 
 ```bash
 JOB_NAME=nodejs-jenkins-k8s-cicd-lab-dev \
@@ -50,7 +50,7 @@ node scripts/jenkins/create-pipeline-job.mjs
 
 ## Aplicar no Jenkins real
 
-Opcao 1, usando variaveis exportadas no shell:
+Opção 1, usando variáveis exportadas no shell:
 
 ```bash
 export JENKINS_URL="http://jenkins.example.local:8080"
@@ -60,7 +60,7 @@ export JENKINS_API_TOKEN="your_jenkins_api_token"
 node scripts/jenkins/create-pipeline-job.mjs --apply
 ```
 
-Opcao 2, usando o arquivo `.env.jenkins.local`:
+Opção 2, usando o arquivo `.env.jenkins.local`:
 
 ```bash
 cp .env.jenkins.example .env.jenkins.local
@@ -79,7 +79,7 @@ node scripts/jenkins/create-pipeline-job.mjs --apply --build
 
 ## Cuidados importantes
 
-- nao versione tokens nem credenciais reais
-- mantenha o token em variaveis de ambiente locais, por exemplo em `.env.jenkins.local`
+- não versione tokens nem credenciais reais
+- mantenha o token em variáveis de ambiente locais, por exemplo em `.env.jenkins.local`
 - revise o `dry-run` antes do primeiro `--apply`
-- o script tenta obter crumb automaticamente, mas continua funcionando com API token se o crumb nao estiver habilitado
+- o script tenta obter crumb automaticamente, mas continua funcionando com API token se o crumb não estiver habilitado

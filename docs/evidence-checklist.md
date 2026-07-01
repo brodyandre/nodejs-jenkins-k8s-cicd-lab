@@ -1,16 +1,16 @@
-# Evidence Checklist
+# Checklist de evidências
 
-Checklist de revisao das evidencias reais do laboratorio para portfolio DevOps/CI/CD.
+Checklist de revisão das evidências reais do laboratório para portfólio DevOps/CI/CD.
 
 ## Regras gerais
 
-- nao capturar senhas, tokens, kubeconfig ou variaveis sensiveis
-- ocultar usernames sensiveis se o contexto pedir anonimato
-- preferir prints com data, nome do job e status visivel
+- não capturar senhas, tokens, kubeconfig ou variáveis sensíveis
+- ocultar usernames sensíveis se o contexto pedir anonimato
+- preferir prints com data, nome do job e status visível
 - manter a mesma nomenclatura do projeto em todas as capturas
 - manter logs crus fora do Git; publicar apenas resumos sanitizados em `.md` ou `.txt`
 
-## Evidencias reais atualmente presentes em `docs/images/`
+## Evidências reais atualmente presentes em `docs/images/`
 
 - `docs/images/01-github-repository.png`
 - `docs/images/02-github-jenkinsfile-pipeline-stages.png`
@@ -35,12 +35,12 @@ Checklist de revisao das evidencias reais do laboratorio para portfolio DevOps/C
 - `docs/images/21-project-structure.png`
 - `docs/images/22-docs-evidence-files.png`
 
-## Evidencia sanitizada versionavel
+## Evidência sanitizada versionável
 
-- `docs/evidence/README.md`: indice publico das capturas e politica para logs locais
+- `docs/evidence/README.md`: índice público das capturas e política para logs locais
 
 ## Capturas adicionais opcionais
 
 - [ ] tela do job criado automaticamente via API do Jenkins
-- [ ] configuracao do job `Pipeline from SCM` com branch `main` e `Jenkinsfile`
-- [ ] console da primeira execucao disparada pela automacao do job
+- [ ] configuração do job `Pipeline from SCM` com branch `main` e `Jenkinsfile`
+- [ ] console da primeira execução disparada pela automação do job

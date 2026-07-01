@@ -1,10 +1,10 @@
-# Kubernetes Deploy
+# Deploy no Kubernetes
 
 ## Objetivo
 
-Validar se a aplicacao foi entregue corretamente no cluster k3d usando os manifests da pasta `k8s/`.
+Validar se a aplicação foi entregue corretamente no cluster k3d usando os manifests da pasta `k8s/`.
 
-No fluxo validado deste laboratorio:
+No fluxo validado deste laboratório:
 
 - namespace: `jenkins-cicd-lab`
 - deployment: `order-status-api`
@@ -12,18 +12,18 @@ No fluxo validado deste laboratorio:
 - porta do service: `3000`
 - imagem implantada: `las43/order-status-api:4-c36c06a`
 
-Observacao:
+Observação:
 
-- o manifest base de `k8s/deployment.yaml` usa `order-status-api:local` para execucao manual
+- o manifest base de `k8s/deployment.yaml` usa `order-status-api:local` para execução manual
 - na pipeline Jenkins, o deployment recebe a tag publicada no Docker Hub via `kubectl set image`
 
-## Aplicacao manual dos manifests
+## Aplicação manual dos manifests
 
 ```bash
 kubectl apply -k k8s/
 ```
 
-## Validacoes principais
+## Validações principais
 
 ### Namespace
 
@@ -65,11 +65,11 @@ kubectl -n jenkins-cicd-lab run smoke-test --rm -it --restart=Never \
   curl -fsS http://order-status-api.jenkins-cicd-lab.svc.cluster.local:3000/health
 ```
 
-## Sinais de deploy saudavel
+## Sinais de deploy saudável
 
-- deployment com replicas disponiveis
+- deployment com réplicas disponíveis
 - pods em `Running` e `Ready`
 - service criado com `ClusterIP`
-- rollout concluido sem timeout
+- rollout concluído sem timeout
 - endpoint `/health` respondendo com sucesso no smoke test
-- namespace correto isolando os recursos do laboratorio
+- namespace correto isolando os recursos do laboratório

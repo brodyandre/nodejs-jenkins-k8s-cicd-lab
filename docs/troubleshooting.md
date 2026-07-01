@@ -1,20 +1,20 @@
-# Troubleshooting
+# Solução de problemas
 
-## Erros comuns e solucoes
+## Erros comuns e soluções
 
-| Sintoma | Causa provavel | Acao recomendada |
+| Sintoma | Causa provável | Ação recomendada |
 | --- | --- | --- |
-| `docker: permission denied` | usuario `jenkins` sem permissao no daemon Docker | adicionar o usuario ao grupo `docker` e reiniciar a sessao do agente |
-| `docker login failed` | credencial `dockerhub` invalida ou expirada | recriar token no Docker Hub e atualizar a credencial no Jenkins |
-| `kubectl` sem contexto | kubeconfig ausente, invalido ou apontando para cluster errado | revisar a credencial `kube` e validar `kubectl config get-contexts` |
+| `docker: permission denied` | usuário `jenkins` sem permissão no daemon Docker | adicionar o usuário ao grupo `docker` e reiniciar a sessão do agente |
+| `docker login failed` | credencial `dockerhub` inválida ou expirada | recriar token no Docker Hub e atualizar a credencial no Jenkins |
+| `kubectl` sem contexto | kubeconfig ausente, inválido ou apontando para cluster errado | revisar a credencial `kube` e validar `kubectl config get-contexts` |
 | `credentialsId 'kube' not found` | ID da credencial divergente | garantir que o ID no Jenkins seja exatamente `kube` |
-| `ImagePullBackOff` | imagem nao publicada, tag incorreta ou registro inacessivel | validar push da imagem, nome do repositorio e tag usada no deployment |
-| `CrashLoopBackOff` | falha na inicializacao da aplicacao ou probes incorretas | revisar `kubectl logs`, `kubectl describe pod` e configuracoes de `PORT`, `/health` e `/ready` |
-| rollout em timeout | nova replica nao fica pronta | verificar eventos do deployment, disponibilidade de imagem e readiness probe |
-| `kubectl rollout status` nao conclui | pods nao ficam prontos ou imagem nao sobe | revisar readiness probe, eventos do deployment e logs da aplicacao |
-| Jenkins nao cria agent | node offline, restricao de executor ou configuracao incorreta | revisar status do agente, labels e capacidade de execucao |
+| `ImagePullBackOff` | imagem não publicada, tag incorreta ou registro inacessível | validar push da imagem, nome do repositório e tag usada no deployment |
+| `CrashLoopBackOff` | falha na inicialização da aplicação ou probes incorretas | revisar `kubectl logs`, `kubectl describe pod` e configurações de `PORT`, `/health` e `/ready` |
+| rollout em timeout | nova réplica não fica pronta | verificar eventos do deployment, disponibilidade de imagem e readiness probe |
+| `kubectl rollout status` não conclui | pods não ficam prontos ou a imagem não sobe | revisar readiness probe, eventos do deployment e logs da aplicação |
+| Jenkins não cria agent | node offline, restrição de executor ou configuração incorreta | revisar status do agente, labels e capacidade de execução |
 
-## Comandos uteis
+## Comandos úteis
 
 ```bash
 docker ps
@@ -24,11 +24,11 @@ kubectl -n jenkins-cicd-lab describe deployment order-status-api
 kubectl -n jenkins-cicd-lab logs deployment/order-status-api
 ```
 
-## Dica para portfolio
+## Dica para portfólio
 
-Ao registrar evidencias de erro e correcao, prefira mostrar:
+Ao registrar evidências de erro e correção, prefira mostrar:
 
 - sintoma observado
-- comando usado para diagnostico
+- comando usado para diagnóstico
 - ajuste aplicado
-- evidencia final de sucesso
+- evidência final de sucesso

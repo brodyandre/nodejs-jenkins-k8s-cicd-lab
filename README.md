@@ -1,8 +1,8 @@
 <a id="topo"></a>
 
-# 🚀 Order Status API CI/CD Lab with Jenkins, Docker Hub, and Kubernetes/k3d
+# 🚀 Laboratório CI/CD da Order Status API com Jenkins, Docker Hub e Kubernetes/k3d
 
-Laboratorio local/VM de CI/CD para demonstrar, de forma objetiva e reproduzivel, como uma API Node.js pode passar por validacao automatizada, build Docker, publicacao no Docker Hub e deploy em Kubernetes k3d a partir de uma pipeline Jenkins.
+Laboratório local/VM de CI/CD para demonstrar, de forma objetiva e reproduzível, como uma API Node.js pode passar por validação automatizada, build Docker, publicação no Docker Hub e deploy em Kubernetes k3d a partir de uma pipeline Jenkins.
 
 <div align="center">
   <p>
@@ -24,28 +24,28 @@ Laboratorio local/VM de CI/CD para demonstrar, de forma objetiva e reproduzivel,
     <a href="#fluxo-cicd">🔄 Fluxo CI/CD</a> •
     <a href="#evidencias-do-pipeline-ci-cd">📸 Evidências</a> •
     <a href="#deploy-no-kubernetes">☸️ Deploy</a> •
-    <a href="#como-executar-localmente">▶️ Run Local</a>
+    <a href="#como-executar-localmente">▶️ Executar localmente</a>
   </p>
 </div>
 
 ## Status atual
 
-- ✅ laboratorio validado em ambiente local/VM com Jenkins e cluster k3d
-- 📦 build `#4` concluido com publicacao da imagem `las43/order-status-api:4-c36c06a`
+- ✅ laboratório validado em ambiente local/VM com Jenkins e cluster k3d
+- 📦 build `#4` concluído com publicação da imagem `las43/order-status-api:4-c36c06a`
 - 🧾 pipeline declarativa implementada em `Jenkinsfile`
-- 🖼️ evidencias reais versionadas em `docs/images/`
-- 📚 indice sanitizado das evidencias em `docs/evidence/README.md`
+- 🖼️ evidências reais versionadas em `docs/images/`
+- 📚 índice sanitizado das evidências em `docs/evidence/README.md`
 
-> **Snapshot do laboratorio:** `GitHub -> Jenkins -> Docker Hub -> Kubernetes/k3d -> Smoke Test`
+> **Snapshot do laboratório:** `GitHub -> Jenkins -> Docker Hub -> Kubernetes/k3d -> Smoke Test`
 >
-> **Estado validado:** `Build #4` • `order-status-api` • `2/2 replicas` • `Service is healthy`
+> **Estado validado:** `Build #4` • `order-status-api` • `2/2 réplicas` • `Service is healthy`
 
-## Indice
+## Índice
 
-- [Visao geral](#visao-geral)
-- [Objetivo do laboratorio](#objetivo-do-laboratorio)
+- [Visão geral](#visao-geral)
+- [Objetivo do laboratório](#objetivo-do-laboratorio)
 - [Problema que o projeto resolve](#problema-que-o-projeto-resolve)
-- [Arquitetura da solucao](#arquitetura-da-solucao)
+- [Arquitetura da solução](#arquitetura-da-solucao)
 - [Fluxo CI/CD](#fluxo-cicd)
 - [Stack utilizada](#stack-utilizada)
 - [Pre-requisitos](#pre-requisitos)
@@ -57,55 +57,55 @@ Laboratorio local/VM de CI/CD para demonstrar, de forma objetiva e reproduzivel,
 - [Como executar com Docker](#como-executar-com-docker)
 - [Deploy no Kubernetes](#deploy-no-kubernetes)
 - [Pipeline Jenkins](#pipeline-jenkins)
-- [Automacao do job Jenkins via API](#automacao-do-job-jenkins-via-api)
+- [Automação do job Jenkins via API](#automacao-do-job-jenkins-via-api)
 - [Credenciais Jenkins](#credenciais-jenkins)
-- [Integracao com Docker Hub](#integracao-com-docker-hub)
-- [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
+- [Integração com Docker Hub](#integracao-com-docker-hub)
+- [Integração com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
 - [Evidências do Pipeline CI/CD](#evidencias-do-pipeline-ci-cd)
-- [Troubleshooting](#troubleshooting)
-- [Seguranca e boas praticas](#seguranca-e-boas-praticas)
-- [Boas praticas demonstradas](#boas-praticas-demonstradas)
-- [Proximas melhorias](#proximas-melhorias)
+- [Solução de problemas](#troubleshooting)
+- [Segurança e boas práticas](#seguranca-e-boas-praticas)
+- [Boas práticas demonstradas](#boas-praticas-demonstradas)
+- [Próximas melhorias](#proximas-melhorias)
 - [Como este projeto demonstra habilidades profissionais](#como-este-projeto-demonstra-habilidades-profissionais)
 
 <a id="visao-geral"></a>
-## Visao geral
+## Visão geral
 
-Este repositorio apresenta a `Order Status API`, uma REST API simples para consulta e criacao de pedidos em memoria, utilizada como base para demonstrar uma esteira realista de entrega continua.
+Este repositório apresenta a `Order Status API`, uma REST API simples para consulta e criação de pedidos em memória, utilizada como base para demonstrar uma esteira realista de entrega contínua.
 
-O ambiente validado deste projeto e um laboratorio local/VM com Jenkins e cluster k3d. O objetivo aqui e demonstrar fundamentos de CI/CD, conteinerizacao e deploy automatizado, e nao afirmar operacao em ambiente produtivo.
+O ambiente validado deste projeto é um laboratório local/VM com Jenkins e cluster k3d. O objetivo aqui é demonstrar fundamentos de CI/CD, conteinerização e deploy automatizado, e não afirmar operação em ambiente produtivo.
 
-O foco do laboratorio nao e a complexidade de negocio, e sim a demonstracao pratica de habilidades de DevOps e CI/CD:
+O foco do laboratório não é a complexidade de negócio, e sim a demonstração prática de habilidades de DevOps e CI/CD:
 
-- validacao automatica com lint e testes
-- build de imagem Docker para runtime de producao
+- validação automática com lint e testes
+- build de imagem Docker para runtime de produção
 - deploy com manifests Kubernetes
 - pipeline declarativa no Jenkins
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="objetivo-do-laboratorio"></a>
-## Objetivo do laboratorio
+## Objetivo do laboratório
 
-Construir um projeto pequeno, legivel e reproduzivel que permita demonstrar:
+Construir um projeto pequeno, legível e reproduzível que permita demonstrar:
 
-- desenvolvimento de API Node.js com boas praticas
+- desenvolvimento de API Node.js com boas práticas
 - testes automatizados com Jest e Supertest
-- containerizacao com Docker
+- conteinerização com Docker
 - deploy em Kubernetes k3d
-- automacao de pipeline com Jenkins
+- automação de pipeline com Jenkins
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="problema-que-o-projeto-resolve"></a>
 ## Problema que o projeto resolve
 
-Em muitos estudos de CI/CD, os exemplos param no build local ou nao conectam validacao, imagem, registro e deploy em uma mesma jornada. Este laboratorio conecta essas etapas em um fluxo unico, facil de explicar em entrevistas e facil de evoluir com evidencias reais.
+Em muitos estudos de CI/CD, os exemplos param no build local ou não conectam validação, imagem, registro e deploy em uma mesma jornada. Este laboratório conecta essas etapas em um fluxo único, fácil de explicar em entrevistas e fácil de evoluir com evidências reais.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="arquitetura-da-solucao"></a>
-## Arquitetura da solucao
+## Arquitetura da solução
 
 ```mermaid
 flowchart LR
@@ -124,24 +124,24 @@ GitHub -> Jenkins -> npm ci/lint/test -> Docker build -> Docker Hub -> Kubernete
 
 Componentes principais:
 
-| Componente | Papel no laboratorio |
+| Componente | Papel no laboratório |
 | --- | --- |
-| GitHub | hospeda o codigo e o Jenkinsfile |
+| GitHub | hospeda o código e o Jenkinsfile |
 | Jenkins | executa a pipeline declarativa |
-| Node.js API | aplicacao de exemplo do fluxo |
-| Docker | empacota a aplicacao para runtime padronizado |
+| Node.js API | aplicação de exemplo do fluxo |
+| Docker | empacota a aplicação para runtime padronizado |
 | Docker Hub | armazena a imagem publicada |
 | Kubernetes k3d | recebe o deploy e executa o smoke test interno |
 
 ### 🖼️ Contexto visual do repositório
 
-**GitHub - Repositório publicado**: Comprova que o codigo-fonte da aplicacao e a automacao de CI/CD estao versionados no GitHub.
+**GitHub - Repositório publicado**: Comprova que o código-fonte da aplicação e a automação de CI/CD estão versionados no GitHub.
 
 <p align="center">
-  <img src="docs/images/01-github-repository.png" alt="GitHub - Repositorio publicado" width="980" />
+  <img src="docs/images/01-github-repository.png" alt="GitHub - Repositório publicado" width="980" />
 </p>
 
-**GitHub - Jenkinsfile versionado**: Comprova que o pipeline Jenkins esta definido como codigo no proprio repositorio.
+**GitHub - Jenkinsfile versionado**: Comprova que o pipeline Jenkins está definido como código no próprio repositório.
 
 <p align="center">
   <img src="docs/images/02-github-jenkinsfile-pipeline-stages.png" alt="GitHub - Jenkinsfile versionado" width="980" />
@@ -152,14 +152,14 @@ Componentes principais:
 <a id="fluxo-cicd"></a>
 ## Fluxo CI/CD
 
-1. O codigo e obtido do SCM pelo Jenkins.
-2. A pipeline instala dependencias com `npm ci`.
+1. O código é obtido do SCM pelo Jenkins.
+2. A pipeline instala dependências com `npm ci`.
 3. O projeto passa por lint e testes automatizados.
-4. A imagem Docker e gerada com tag imutavel e `latest`.
+4. A imagem Docker é gerada com tag imutável e `latest`.
 5. A imagem pode ser publicada no Docker Hub.
-6. Os manifests Kubernetes sao aplicados.
+6. Os manifests Kubernetes são aplicados.
 7. O deployment recebe a nova imagem.
-8. O rollout e acompanhado ate concluir.
+8. O rollout é acompanhado até concluir.
 9. Um smoke test interno valida o endpoint `/health`.
 
 [⬆ Voltar ao topo](#topo)
@@ -188,26 +188,26 @@ Componentes principais:
 | Qualidade | Jest, Supertest, ESLint |
 | Container | Docker, Docker Hub |
 | CI/CD | Jenkins |
-| Orquestracao | Kubernetes, k3d |
+| Orquestração | Kubernetes, k3d |
 
-Este conjunto foi pensado para um laboratorio reproduzivel, pequeno o suficiente para estudo e claro o suficiente para ser explicado em entrevistas tecnicas.
+Este conjunto foi pensado para um laboratório reproduzível, pequeno o suficiente para estudo e claro o suficiente para ser explicado em entrevistas técnicas.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="pre-requisitos"></a>
 ## Pre-requisitos
 
-Para reproduzir o laboratorio localmente, estes sao os itens recomendados:
+Para reproduzir o laboratório localmente, estes são os itens recomendados:
 
 - `Node.js 18+` e `npm`
 - `Docker`
 - `Git`
 - `kubectl`
-- `k3d`, se voce quiser subir e validar o cluster local
+- `k3d`, se você quiser subir e validar o cluster local
 - Jenkins local/VM com acesso a `docker` e `kubectl`, caso queira executar a pipeline ponta a ponta
 - conta no Docker Hub com token ou credencial equivalente para testar o push da imagem
 
-Se o objetivo for apenas rodar a API e os testes localmente, `Node.js` e `npm` ja sao suficientes.
+Se o objetivo for apenas rodar a API e os testes localmente, `Node.js` e `npm` já são suficientes.
 
 [⬆ Voltar ao topo](#topo)
 
@@ -215,10 +215,10 @@ Se o objetivo for apenas rodar a API e os testes localmente, `Node.js` e `npm` j
 ## Funcionalidades da API
 
 - consulta de status operacional com `/health`
-- sinalizacao de readiness com `/ready`
-- listagem de pedidos em memoria
+- sinalização de readiness com `/ready`
+- listagem de pedidos em memória
 - consulta individual por ID
-- criacao de pedido com validacao de payload
+- criação de pedido com validação de payload
 - respostas JSON padronizadas para sucesso e erro
 
 [⬆ Voltar ao topo](#topo)
@@ -226,11 +226,11 @@ Se o objetivo for apenas rodar a API e os testes localmente, `Node.js` e `npm` j
 <a id="endpoints-da-api"></a>
 ## Endpoints da API
 
-| Metodo | Endpoint | Descricao |
+| Método | Endpoint | Descrição |
 | --- | --- | --- |
-| `GET` | `/health` | health check da aplicacao |
+| `GET` | `/health` | health check da aplicação |
 | `GET` | `/ready` | readiness check para runtime e Kubernetes |
-| `GET` | `/api/v1/orders` | lista pedidos em memoria |
+| `GET` | `/api/v1/orders` | lista pedidos em memória |
 | `GET` | `/api/v1/orders/:id` | busca um pedido por ID |
 | `POST` | `/api/v1/orders` | cria um novo pedido |
 
@@ -289,7 +289,7 @@ Payload de exemplo:
 <a id="como-executar-localmente"></a>
 ## Como executar localmente
 
-1. Instale as dependencias:
+1. Instale as dependências:
 
 ```bash
 npm ci
@@ -307,7 +307,7 @@ cp .env.example .env
 npm run dev
 ```
 
-4. Execute a validacao local:
+4. Execute a validação local:
 
 ```bash
 npm run verify
@@ -319,7 +319,7 @@ npm run verify
 curl http://localhost:3000/health
 ```
 
-Variaveis esperadas:
+Variáveis esperadas:
 
 ```env
 PORT=3000
@@ -332,23 +332,23 @@ APP_VERSION=1.0.0
 <a id="como-executar-testes"></a>
 ## Como executar testes
 
-Os testes e validacoes locais seguem os mesmos scripts usados pela pipeline Jenkins:
+Os testes e validações locais seguem os mesmos scripts usados pela pipeline Jenkins:
 
 | Comando | Objetivo |
 | --- | --- |
-| `npm test` | executa a suite automatizada com Jest |
+| `npm test` | executa a suíte automatizada com Jest |
 | `npm run test:coverage` | gera cobertura de testes |
-| `npm run lint` | valida padroes de codigo com ESLint |
-| `npm run verify` | executa `lint` + `test` em sequencia |
+| `npm run lint` | valida padrões de código com ESLint |
+| `npm run verify` | executa `lint` + `test` em sequência |
 
-Os testes cobrem cenarios unitarios e de integracao da API com `Jest` e `Supertest`.
+Os testes cobrem cenários unitários e de integração da API com `Jest` e `Supertest`.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="como-executar-com-docker"></a>
 ## Como executar com Docker
 
-O `Dockerfile` deste projeto tambem e o mesmo usado pela pipeline Jenkins. Isso ajuda a reduzir diferencas entre a validacao local e a validacao automatizada.
+O `Dockerfile` deste projeto também é o mesmo usado pela pipeline Jenkins. Isso ajuda a reduzir diferenças entre a validação local e a validação automatizada.
 
 Build da imagem:
 
@@ -370,7 +370,7 @@ curl http://localhost:3000/ready
 curl http://localhost:3000/api/v1/orders
 ```
 
-No fluxo validado do laboratorio, a mesma imagem e gerada no Jenkins, testada localmente em container e depois publicada no Docker Hub com tag imutavel e `latest`.
+No fluxo validado do laboratório, a mesma imagem é gerada no Jenkins, testada localmente em container e depois publicada no Docker Hub com tag imutável e `latest`.
 
 [⬆ Voltar ao topo](#topo)
 
@@ -379,10 +379,10 @@ No fluxo validado do laboratorio, a mesma imagem e gerada no Jenkins, testada lo
 
 Os manifests da pasta `k8s/` usam o namespace `jenkins-cicd-lab`.
 
-Para execucao manual local, o `deployment.yaml` parte da imagem base `order-status-api:local`.
-No fluxo validado da pipeline Jenkins, esse valor e sobrescrito com `kubectl set image` para apontar para a tag publicada no Docker Hub.
+Para execução manual local, o `deployment.yaml` parte da imagem base `order-status-api:local`.
+No fluxo validado da pipeline Jenkins, esse valor é sobrescrito com `kubectl set image` para apontar para a tag publicada no Docker Hub.
 
-No laboratorio validado, o deployment recebeu a imagem `las43/order-status-api:4-c36c06a` e concluiu rollout com `2/2` replicas prontas.
+No laboratório validado, o deployment recebeu a imagem `las43/order-status-api:4-c36c06a` e concluiu rollout com `2/2` réplicas prontas.
 O Service aplicado nesse fluxo usa o nome `order-status-api`, tipo `ClusterIP` e porta `3000`.
 
 Se a imagem existir apenas localmente, importe-a no k3d:
@@ -419,7 +419,7 @@ kubectl -n jenkins-cicd-lab run smoke-test --rm -it --restart=Never \
 <a id="pipeline-jenkins"></a>
 ## Pipeline Jenkins
 
-O `Jenkinsfile` foi estruturado para um laboratorio local/VM com Docker, `kubectl`, credencial Docker Hub e credencial kubeconfig.
+O `Jenkinsfile` foi estruturado para um laboratório local/VM com Docker, `kubectl`, credencial Docker Hub e credencial kubeconfig.
 
 Resumo do fluxo da pipeline:
 
@@ -427,15 +427,15 @@ Resumo do fluxo da pipeline:
 Checkout -> npm ci -> lint -> test -> docker build -> smoke test local -> docker push -> kubectl apply/set image -> rollout -> smoke test no cluster
 ```
 
-Estagios implementados:
+Estágios implementados:
 
-| Estagio | Objetivo |
+| Estágio | Objetivo |
 | --- | --- |
-| `Checkout` | baixa o codigo e monta a tag imutavel |
-| `Tooling Info` | exibe versoes das ferramentas do agente |
-| `Install Dependencies` | instala dependencias com `npm ci` |
+| `Checkout` | baixa o código e monta a tag imutável |
+| `Tooling Info` | exibe versões das ferramentas do agente |
+| `Install Dependencies` | instala dependências com `npm ci` |
 | `Lint` | executa ESLint |
-| `Test` | executa a suite automatizada |
+| `Test` | executa a suíte automatizada |
 | `Build Docker Image` | gera a imagem local |
 | `Smoke Test Docker Image` | valida a imagem via `/health` |
 | `Push Docker Image to Docker Hub` | publica as tags da imagem |
@@ -443,34 +443,34 @@ Estagios implementados:
 | `Kubernetes Smoke Test` | testa a API via Service DNS no cluster |
 | `Cleanup Local Docker Resources` | remove artefatos locais do job |
 
-O objetivo da pipeline e demonstrar uma jornada tecnica coerente de CI/CD em laboratorio: validar codigo, empacotar a aplicacao, publicar a imagem e confirmar o deploy no cluster com smoke test interno.
+O objetivo da pipeline é demonstrar uma jornada técnica coerente de CI/CD em laboratório: validar código, empacotar a aplicação, publicar a imagem e confirmar o deploy no cluster com smoke test interno.
 
 ### 📸 Execução validada no Jenkins
 
-**Jenkins - Job configurado**: Comprova a existencia do job dedicado `nodejs-jenkins-k8s-cicd-lab` no Jenkins.
+**Jenkins - Job configurado**: Comprova a existência do job dedicado `nodejs-jenkins-k8s-cicd-lab` no Jenkins.
 
 <p align="center">
   <img src="docs/images/03-jenkins-job-dashboard.png" alt="Jenkins - Job configurado" width="980" />
 </p>
 
-**Jenkins - Build #4 com sucesso**: Comprova a execucao bem-sucedida da pipeline validada neste laboratorio.
+**Jenkins - Build #4 com sucesso**: Comprova a execução bem-sucedida da pipeline validada neste laboratório.
 
 <p align="center">
   <img src="docs/images/04-jenkins-build-4-success.png" alt="Jenkins - Build 4 com sucesso" width="980" />
 </p>
 
-**Jenkins - Testes automatizados**: Comprova que a aplicacao Node.js passou pela etapa de testes antes do empacotamento.
+**Jenkins - Testes automatizados**: Comprova que a aplicação Node.js passou pela etapa de testes antes do empacotamento.
 
 <p align="center">
   <img src="docs/images/06-jenkins-console-tests-passed.png" alt="Jenkins - Testes automatizados" width="980" />
 </p>
 
-Automacao do job:
+Automação do job:
 
-- o repositorio inclui `scripts/jenkins/create-pipeline-job.mjs` para criar ou atualizar o job ideal no Jenkins via API
-- o `dry-run` e o comportamento padrao; o script so chama o Jenkins real com `--apply`
-- para este projeto, o melhor ponto de partida e um job dedicado `nodejs-jenkins-k8s-cicd-lab`
-- se no futuro voce quiser validar multiplas branches automaticamente, a evolucao natural e `Multibranch Pipeline`
+- o repositório inclui `scripts/jenkins/create-pipeline-job.mjs` para criar ou atualizar o job ideal no Jenkins via API
+- o `dry-run` é o comportamento padrão; o script só chama o Jenkins real com `--apply`
+- para este projeto, o melhor ponto de partida é um job dedicado `nodejs-jenkins-k8s-cicd-lab`
+- se no futuro você quiser validar múltiplas branches automaticamente, a evolução natural é `Multibranch Pipeline`
 
 [⬆ Voltar ao topo](#topo)
 
@@ -479,7 +479,7 @@ Automacao do job:
 
 O projeto inclui um script para criar ou atualizar automaticamente um job Jenkins do tipo `Pipeline from SCM` apontando para este repositório no GitHub.
 
-Esse fluxo foi documentado para um Jenkins local acessivel por uma URL como:
+Esse fluxo foi documentado para um Jenkins local acessível por uma URL como:
 
 ```text
 http://jenkins.example.local:8080
@@ -487,10 +487,10 @@ http://jenkins.example.local:8080
 
 Pre-requisitos:
 
-- Jenkins acessivel na URL do seu ambiente
-- usuario Jenkins com permissao de criacao e configuracao de jobs
-- API token criado pelo usuario Jenkins
-- repositorio GitHub ja publicado
+- Jenkins acessível na URL do seu ambiente
+- usuário Jenkins com permissão de criação e configuração de jobs
+- API token criado pelo usuário Jenkins
+- repositório GitHub já publicado
 - `Jenkinsfile` presente na raiz do repositório
 
 Passos recomendados:
@@ -502,30 +502,30 @@ npm run jenkins:job:apply
 npm run jenkins:job:apply-build
 ```
 
-Observacoes importantes:
+Observações importantes:
 
 - o script carrega `.env.jenkins.local` automaticamente quando esse arquivo existir na raiz do projeto
-- o `dry-run` e o comportamento padrao do script e apenas mostra o `config.xml` gerado
-- a chamada real ao Jenkins so acontece com `--apply`
+- o `dry-run` é o comportamento padrão do script e apenas mostra o `config.xml` gerado
+- a chamada real ao Jenkins só acontece com `--apply`
 - o arquivo `.env.jenkins.local` nunca deve ser commitado
 
-As capturas reais desta automacao e da execucao da pipeline estao documentadas em `docs/images/` e indexadas em `docs/evidence/README.md`.
+As capturas reais desta automação e da execução da pipeline estão documentadas em `docs/images/` e indexadas em `docs/evidence/README.md`.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="credenciais-jenkins"></a>
 ## Credenciais Jenkins
 
-| Credential ID | Tipo recomendado | Uso |
+| ID da credencial | Tipo recomendado | Uso |
 | --- | --- | --- |
-| `dockerhub` | `Username with password` | login seguro no Docker Hub e publicacao da imagem |
-| `kube` | credencial com kubeconfig | autenticacao do `kubectl` para deploy e validacao |
+| `dockerhub` | `Username with password` | login seguro no Docker Hub e publicação da imagem |
+| `kube` | credencial com kubeconfig | autenticação do `kubectl` para deploy e validação |
 
-Observacoes:
+Observações:
 
 - preferir token do Docker Hub no lugar de senha
-- nao expor valores em capturas de tela
-- revisar permissao do usuario `jenkins` para Docker e acesso ao cluster
+- não expor valores em capturas de tela
+- revisar permissão do usuário `jenkins` para Docker e acesso ao cluster
 
 **Jenkins - Credenciais protegidas**: Comprova que a pipeline referencia credenciais por ID, sem expor tokens, senhas ou secrets no painel.
 
@@ -536,51 +536,51 @@ Observacoes:
 [⬆ Voltar ao topo](#topo)
 
 <a id="integracao-com-docker-hub"></a>
-## Integracao com Docker Hub
+## Integração com Docker Hub
 
-A pipeline monta o nome do repositorio a partir da credencial Docker Hub configurada no Jenkins. No `Jenkinsfile`, o formato e:
+A pipeline monta o nome do repositório a partir da credencial Docker Hub configurada no Jenkins. No `Jenkinsfile`, o formato é:
 
 ```text
 $DOCKERHUB_USER/order-status-api
 ```
 
-No fluxo validado deste laboratorio, o usuario Docker Hub foi `las43` e o repositorio publicado foi:
+No fluxo validado deste laboratório, o usuário Docker Hub foi `las43` e o repositório publicado foi:
 
 ```text
 las43/order-status-api
 ```
 
-Estrategia de tags:
+Estratégia de tags:
 
-- tag imutavel baseada em `BUILD_NUMBER` e `git short sha`
-- tag `latest` para referencia operacional
+- tag imutável baseada em `BUILD_NUMBER` e `git short sha`
+- tag `latest` para referência operacional
 
 Fluxo de build e push:
 
 1. o Jenkins gera a imagem a partir do `Dockerfile`
 2. a imagem passa por smoke test local em container
 3. a credencial `dockerhub` autentica o push
-4. a pipeline publica a tag imutavel e a tag `latest`
+4. a pipeline publica a tag imutável e a tag `latest`
 
-Exemplo validado neste laboratorio:
+Exemplo validado neste laboratório:
 
 ```text
 las43/order-status-api:4-c36c06a
 ```
 
-**Docker - Build e smoke test local**: Comprova que a imagem foi gerada e validada localmente antes da publicacao.
+**Docker - Build e smoke test local**: Comprova que a imagem foi gerada e validada localmente antes da publicação.
 
 <p align="center">
   <img src="docs/images/07-jenkins-console-docker-build-smoke.png" alt="Docker - Build e smoke test local" width="980" />
 </p>
 
-**Docker Hub - Push da imagem**: Comprova o envio da imagem para o repositorio `las43/order-status-api` a partir do Jenkins.
+**Docker Hub - Push da imagem**: Comprova o envio da imagem para o repositório `las43/order-status-api` a partir do Jenkins.
 
 <p align="center">
   <img src="docs/images/08-jenkins-console-dockerhub-push.png" alt="Docker Hub - Push da imagem" width="980" />
 </p>
 
-**Docker Hub - Tags publicadas**: Comprova a publicacao da imagem validada `las43/order-status-api:4-c36c06a` no Docker Hub.
+**Docker Hub - Tags publicadas**: Comprova a publicação da imagem validada `las43/order-status-api:4-c36c06a` no Docker Hub.
 
 <p align="center">
   <img src="docs/images/11-dockerhub-order-status-api-tags.png" alt="Docker Hub - Tags publicadas" width="980" />
@@ -588,18 +588,18 @@ las43/order-status-api:4-c36c06a
 
 Importante:
 
-- as evidencias reais de push e tags publicadas estao registradas em `docs/images/08-jenkins-console-dockerhub-push.png` e `docs/images/11-dockerhub-order-status-api-tags.png`
+- as evidências reais de push e tags publicadas estão registradas em `docs/images/08-jenkins-console-dockerhub-push.png` e `docs/images/11-dockerhub-order-status-api-tags.png`
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="integracao-com-kubernetes-k3d"></a>
-## Integracao com Kubernetes/k3d
+## Integração com Kubernetes/k3d
 
-O laboratorio foi preparado para um cluster local k3d com:
+O laboratório foi preparado para um cluster local k3d com:
 
 - namespace dedicado `jenkins-cicd-lab`
 - `Service` chamado `order-status-api`
-- `Deployment` com 2 replicas
+- `Deployment` com 2 réplicas
 - `Service` `ClusterIP`
 - porta `3000` exposta no Service e no container
 - `readinessProbe` em `/ready`
@@ -609,54 +609,54 @@ Fluxo de deploy:
 
 1. a pipeline aplica os manifests com `kubectl apply -k k8s/`
 2. o deployment `order-status-api` recebe a nova imagem via `kubectl set image`
-3. o Jenkins acompanha o rollout ate concluir
-4. um pod temporario executa `curl` contra o Service interno
+3. o Jenkins acompanha o rollout até concluir
+4. um pod temporário executa `curl` contra o Service interno
 
-Isso permite demonstrar conceitos de deploy seguro, rollout controlado e verificacao de saude da aplicacao em um cluster local de laboratorio.
+Isso permite demonstrar conceitos de deploy seguro, rollout controlado e verificação de saúde da aplicação em um cluster local de laboratório.
 
-**Kubernetes - Deploy no k3d**: Comprova a etapa de entrega continua para o namespace `jenkins-cicd-lab` e o deployment `order-status-api`.
+**Kubernetes - Deploy no k3d**: Comprova a etapa de entrega contínua para o namespace `jenkins-cicd-lab` e o deployment `order-status-api`.
 
 <p align="center">
   <img src="docs/images/09-jenkins-console-kubernetes-deploy.png" alt="Kubernetes - Deploy no k3d" width="980" />
 </p>
 
-**Kubernetes - `kubectl get all`**: Comprova a visao consolidada dos recursos implantados no namespace `jenkins-cicd-lab`.
+**Kubernetes - `kubectl get all`**: Comprova a visão consolidada dos recursos implantados no namespace `jenkins-cicd-lab`.
 
 <p align="center">
   <img src="docs/images/13-kubernetes-get-all-wide.png" alt="Kubernetes - kubectl get all" width="980" />
 </p>
 
-**Kubernetes - Rollout concluido**: Comprova que o deployment `order-status-api` atingiu estado pronto com `2/2` replicas no namespace alvo.
+**Kubernetes - Rollout concluído**: Comprova que o deployment `order-status-api` atingiu estado pronto com `2/2` réplicas no namespace alvo.
 
 <p align="center">
-  <img src="docs/images/14-kubernetes-deployment-ready.png" alt="Kubernetes - Rollout concluido" width="980" />
+  <img src="docs/images/14-kubernetes-deployment-ready.png" alt="Kubernetes - Rollout concluído" width="980" />
 </p>
 
-**Kubernetes - Smoke test do servico**: Comprova a validacao pos-deploy com a resposta `Service is healthy`.
+**Kubernetes - Smoke test do serviço**: Comprova a validação pós-deploy com a resposta `Service is healthy`.
 
 <p align="center">
-  <img src="docs/images/17-kubernetes-smoke-test-success.png" alt="Kubernetes - Smoke test do servico" width="980" />
+  <img src="docs/images/17-kubernetes-smoke-test-success.png" alt="Kubernetes - Smoke test do serviço" width="980" />
 </p>
 
-Para manter o README focado no fluxo principal, capturas mais operacionais, como `Tooling Info`, `node Ready`, `pods Running`, `Service ClusterIP`, templates de agente e detalhes adicionais de validacao, permanecem concentradas em `docs/evidence/README.md` e `docs/evidence/kubernetes-validation.md`.
+Para manter o README focado no fluxo principal, capturas mais operacionais, como `Tooling Info`, `node Ready`, `pods Running`, `Service ClusterIP`, templates de agente e detalhes adicionais de validação, permanecem concentradas em `docs/evidence/README.md` e `docs/evidence/kubernetes-validation.md`.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="evidencias-do-pipeline-ci-cd"></a>
 ## Evidências do Pipeline CI/CD
 
-Esta secao continua fazendo sentido para empregabilidade porque resume, em um unico ponto, o que um recrutador tecnico consegue comprovar sem precisar percorrer todo o README. As imagens do fluxo principal ja aparecem contextualizadas nas secoes tecnicas acima; aqui o foco e destacar **quais competencias praticas ficaram comprovadas**.
+Esta seção continua fazendo sentido para empregabilidade porque resume, em um único ponto, o que um recrutador técnico consegue comprovar sem precisar percorrer todo o README. As imagens do fluxo principal já aparecem contextualizadas nas seções técnicas acima; aqui o foco é destacar **quais competências práticas ficaram comprovadas**.
 
-### O que este laboratorio comprova
+### O que este laboratório comprova
 
 | Competência demonstrada | Evidência validada | Onde inspecionar |
 | --- | --- | --- |
-| CI/CD como codigo | Repositorio publicado com `Jenkinsfile` versionado e fluxo declarativo definido no Git | [Arquitetura da solucao](#arquitetura-da-solucao) e [Pipeline Jenkins](#pipeline-jenkins) |
+| CI/CD como código | Repositório publicado com `Jenkinsfile` versionado e fluxo declarativo definido no Git | [Arquitetura da solução](#arquitetura-da-solucao) e [Pipeline Jenkins](#pipeline-jenkins) |
 | Qualidade automatizada | Pipeline Jenkins executando `npm ci`, lint e testes antes do empacotamento | [Pipeline Jenkins](#pipeline-jenkins) |
-| Containerizacao e publish | Imagem Docker criada, validada via smoke test local e publicada no Docker Hub como `las43/order-status-api:4-c36c06a` | [Integracao com Docker Hub](#integracao-com-docker-hub) |
-| Deploy em Kubernetes | Atualizacao automatizada do deployment `order-status-api` no namespace `jenkins-cicd-lab` | [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d) e [Deploy no Kubernetes](#deploy-no-kubernetes) |
-| Validacao operacional pos-deploy | Rollout acompanhado, recursos no cluster conferidos e smoke test final retornando `Service is healthy` | [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d) |
-| Higiene de seguranca e documentacao | Credenciais protegidas, `.env.jenkins.local` fora do Git e evidencias sanitizadas para portfolio | [Seguranca e boas praticas](#seguranca-e-boas-praticas) e [docs/evidence/README.md](docs/evidence/README.md) |
+| Conteinerização e publish | Imagem Docker criada, validada via smoke test local e publicada no Docker Hub como `las43/order-status-api:4-c36c06a` | [Integração com Docker Hub](#integracao-com-docker-hub) |
+| Deploy em Kubernetes | Atualização automatizada do deployment `order-status-api` no namespace `jenkins-cicd-lab` | [Integração com Kubernetes/k3d](#integracao-com-kubernetes-k3d) e [Deploy no Kubernetes](#deploy-no-kubernetes) |
+| Validação operacional pós-deploy | Rollout acompanhado, recursos no cluster conferidos e smoke test final retornando `Service is healthy` | [Integração com Kubernetes/k3d](#integracao-com-kubernetes-k3d) |
+| Higiene de segurança e documentação | Credenciais protegidas, `.env.jenkins.local` fora do Git e evidências sanitizadas para portfólio | [Segurança e boas práticas](#seguranca-e-boas-praticas) e [docs/evidence/README.md](docs/evidence/README.md) |
 
 ### Seções-chave para leitura rápida
 
@@ -665,90 +665,90 @@ Para uma revisão objetiva do laboratório, estas seções concentram o fluxo va
 1. [Status atual](#status-atual)
 2. [Fluxo CI/CD](#fluxo-cicd)
 3. [Pipeline Jenkins](#pipeline-jenkins)
-4. [Integracao com Docker Hub](#integracao-com-docker-hub)
-5. [Integracao com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
+4. [Integração com Docker Hub](#integracao-com-docker-hub)
+5. [Integração com Kubernetes/k3d](#integracao-com-kubernetes-k3d)
 
 ### Índice técnico das evidências
 
-Para auditoria detalhada dos artefatos, capturas e comprovacoes tecnicas:
+Para auditoria detalhada dos artefatos, capturas e comprovações técnicas:
 
 - [docs/evidence/README.md](docs/evidence/README.md)
 - [docs/evidence/kubernetes-validation.md](docs/evidence/kubernetes-validation.md)
 - [docs/images/](docs/images/)
 
-O README principal destaca apenas as evidencias mais relevantes para leitura de portfolio; os registros mais operacionais continuam organizados no indice tecnico acima.
+O README principal destaca apenas as evidências mais relevantes para leitura de portfólio; os registros mais operacionais continuam organizados no índice técnico acima.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="troubleshooting"></a>
-## Troubleshooting
+## Solução de problemas
 
-| Sintoma | Possivel causa | Acao recomendada |
+| Sintoma | Possível causa | Ação recomendada |
 | --- | --- | --- |
-| `Docker permission denied` | usuario do Jenkins sem acesso ao daemon | adicionar o usuario ao grupo `docker` e reiniciar a sessao |
-| `kubectl sem contexto` | kubeconfig ausente ou invalido | revisar a credencial `kube` e testar os contextos |
-| `credencial kube nao encontrada` | ID divergente no Jenkins | confirmar o uso exato de `kube` |
-| `Docker Hub login failed` | token ou usuario invalidos | atualizar a credencial `dockerhub` |
-| `image pull error` | imagem nao publicada ou tag incorreta | validar nome do repositorio e tag no deployment |
-| `pod CrashLoopBackOff` | falha no startup ou probes incorretas | revisar logs, describe e configuracao dos endpoints |
-| `Jenkins nao cria agent` | agente offline ou mal configurado | revisar status do node, labels e capacidade de execucao |
+| `Docker permission denied` | usuário do Jenkins sem acesso ao daemon | adicionar o usuário ao grupo `docker` e reiniciar a sessão |
+| `kubectl sem contexto` | kubeconfig ausente ou inválido | revisar a credencial `kube` e testar os contextos |
+| `credencial kube não encontrada` | ID divergente no Jenkins | confirmar o uso exato de `kube` |
+| `Docker Hub login failed` | token ou usuário inválidos | atualizar a credencial `dockerhub` |
+| `image pull error` | imagem não publicada ou tag incorreta | validar nome do repositório e tag no deployment |
+| `pod CrashLoopBackOff` | falha no startup ou probes incorretas | revisar logs, describe e configuração dos endpoints |
+| `Jenkins não cria agent` | agente offline ou mal configurado | revisar status do node, labels e capacidade de execução |
 
-Documentacao complementar:
+Documentação complementar:
 
 - [docs/troubleshooting.md](docs/troubleshooting.md)
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="seguranca-e-boas-praticas"></a>
-## Seguranca e boas praticas
+## Segurança e boas práticas
 
-- `.env.jenkins.local` e mantido fora do versionamento
+- `.env.jenkins.local` é mantido fora do versionamento
 - `.env.jenkins.example` usa placeholders seguros
-- credenciais Jenkins sao referenciadas por ID, sem exposicao de valores
-- kubeconfig nao e armazenado no repositório
-- o `Dockerfile` executa a aplicacao com usuario nao-root
-- os logs e capturas publicados em `docs/` foram revisados para nao expor secrets
+- credenciais Jenkins são referenciadas por ID, sem exposição de valores
+- kubeconfig não é armazenado no repositório
+- o `Dockerfile` executa a aplicação com usuário não-root
+- os logs e capturas publicados em `docs/` foram revisados para não expor secrets
 
-Como este projeto e um laboratorio local/VM, o foco e demonstrar disciplina tecnica e higiene operacional basica, nao politicas completas de seguranca corporativa.
+Como este projeto é um laboratório local/VM, o foco é demonstrar disciplina técnica e higiene operacional básica, não políticas completas de segurança corporativa.
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="boas-praticas-demonstradas"></a>
-## Boas praticas demonstradas
+## Boas práticas demonstradas
 
-- separacao clara entre aplicacao, testes, infraestrutura e documentacao
-- API simples e reproduzivel, sem banco externo
-- validacao automatizada antes de empacotar e publicar
-- imagem Docker enxuta com usuario nao-root
+- separação clara entre aplicação, testes, infraestrutura e documentação
+- API simples e reproduzível, sem banco externo
+- validação automatizada antes de empacotar e publicar
+- imagem Docker enxuta com usuário não-root
 - manifests Kubernetes com probes e recursos definidos
 - pipeline declarativa com credenciais protegidas
-- documentacao com evidencias reais versionadas e indice sanitizado para portfolio
+- documentação com evidências reais versionadas e índice sanitizado para portfólio
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="proximas-melhorias"></a>
-## Proximas melhorias
+## Próximas melhorias
 
-- adicionar badge publico de pipeline quando houver integracao aberta no GitHub
+- adicionar badge público de pipeline quando houver integração aberta no GitHub
 - incluir scanner de vulnerabilidades da imagem
 - separar overlays por ambiente com Kustomize
-- adicionar estrategia de rollback automatizado
-- incluir release notes ou versionamento semantico
+- adicionar estratégia de rollback automatizado
+- incluir release notes ou versionamento semântico
 
 [⬆ Voltar ao topo](#topo)
 
 <a id="como-este-projeto-demonstra-habilidades-profissionais"></a>
 ## Como este projeto demonstra habilidades profissionais
 
-Este repositorio evidencia competencias praticas relevantes para vagas juniores ou pleno inicial em DevOps, Cloud, SRE e Engenharia de Dados com CI/CD:
+Este repositório evidencia competências práticas relevantes para vagas juniores ou pleno inicial em DevOps, Cloud, SRE e Engenharia de Dados com CI/CD:
 
-- automacao de qualidade e validacao continua
-- containerizacao orientada a runtime de producao
-- deploy em Kubernetes com verificacao operacional
-- documentacao tecnica clara para operacao e portfolio
-- preocupacao com rastreabilidade, seguranca e apresentacao profissional
+- automação de qualidade e validação contínua
+- conteinerização orientada a runtime de produção
+- deploy em Kubernetes com verificação operacional
+- documentação técnica clara para operação e portfólio
+- preocupação com rastreabilidade, segurança e apresentação profissional
 
-Documentacao auxiliar:
+Documentação auxiliar:
 
 - [docs/architecture.md](docs/architecture.md)
 - [docs/evidence/README.md](docs/evidence/README.md)

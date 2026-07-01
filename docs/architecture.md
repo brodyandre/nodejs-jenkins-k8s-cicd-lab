@@ -1,18 +1,18 @@
-# Architecture
+# Arquitetura
 
-## Visao geral
+## Visão geral
 
-Este laboratorio demonstra um fluxo de CI/CD para uma API Node.js simples, cobrindo validacao de codigo, empacotamento em container e deploy em Kubernetes.
+Este laboratório demonstra um fluxo de CI/CD para uma API Node.js simples, cobrindo validação de código, empacotamento em container e deploy em Kubernetes.
 
-O objetivo principal e apresentar um caso de portfolio que conecte desenvolvimento, build, publicacao e entrega em um fluxo unico e facil de demonstrar com evidencias visuais.
+O objetivo principal é apresentar um caso de portfólio que conecte desenvolvimento, build, publicação e entrega em um fluxo único e fácil de demonstrar com evidências visuais.
 
 ## Fluxo resumido
 
-1. O codigo e versionado no GitHub.
+1. O código é versionado no GitHub.
 2. O Jenkins executa a pipeline declarativa definida no `Jenkinsfile`.
-3. A pipeline instala dependencias e valida qualidade com lint e testes.
-4. A aplicacao e empacotada em uma imagem Docker.
-5. A imagem e publicada no Docker Hub com tag imutavel e `latest`.
+3. A pipeline instala dependências e valida qualidade com lint e testes.
+4. A aplicação é empacotada em uma imagem Docker.
+5. A imagem é publicada no Docker Hub com tag imutável e `latest`.
 6. O Jenkins aplica os manifests Kubernetes e atualiza o deployment com a nova imagem.
 7. Um smoke test interno valida o Service no cluster k3d.
 
@@ -20,18 +20,18 @@ O objetivo principal e apresentar um caso de portfolio que conecte desenvolvimen
 
 | Componente | Papel |
 | --- | --- |
-| GitHub | origem do codigo e gatilho natural para CI/CD |
-| Jenkins | orquestracao da pipeline |
-| Node.js API | aplicacao de exemplo para o laboratorio |
-| Docker | empacotamento da aplicacao |
+| GitHub | origem do código e gatilho natural para CI/CD |
+| Jenkins | orquestração da pipeline |
+| Node.js API | aplicação de exemplo para o laboratório |
+| Docker | empacotamento da aplicação |
 | Docker Hub | registro de imagens |
-| Kubernetes k3d | ambiente de deploy e validacao |
+| Kubernetes k3d | ambiente de deploy e validação |
 
-## Decisoes de design
+## Decisões de design
 
-- API sem banco de dados para manter reproducibilidade
+- API sem banco de dados para manter reprodutibilidade
 - testes automatizados antes de build e deploy
-- tags imutaveis para rastreabilidade entre build e release
-- probes de saude no Kubernetes para aumentar confiabilidade do deploy
-- smoke test interno no cluster para validar a entrega fim a fim
-- documentacao preparada para screenshots reais sem inventar resultados
+- tags imutáveis para rastreabilidade entre build e release
+- probes de saúde no Kubernetes para aumentar a confiabilidade do deploy
+- smoke test interno no cluster para validar a entrega de ponta a ponta
+- documentação preparada para screenshots reais sem inventar resultados
